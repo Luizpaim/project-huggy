@@ -10,10 +10,7 @@
             <InputSearch type="text" placeholder="Buscar Contato" @input="updateValueDistrict" />
           </div>
           <div class="newContact">
-            <AddNewContact
-              @addNewContact="getAllContacts()"
-              token="eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjhmZDRmYTQzYjQwZDljNDNmYjM4MDc1M2ZhMGM3NGViYWNhM2Y2NTQzNDQxNWZmZTk2NGMwM2VkYWY4MzUzMjZkZmVkMDg0NDg3YmFlZDJjIn0.eyJhdWQiOiJBUFAtNzkzZDdkNGUtOGY1Zi00NzEzLWE3MzYtYTYzNDBlZDNjYmMwIiwianRpIjoiOGZkNGZhNDNiNDBkOWM0M2ZiMzgwNzUzZmEwYzc0ZWJhY2EzZjY1NDM0NDE1ZmZlOTY0YzAzZWRhZjgzNTMyNmRmZWQwODQ0ODdiYWVkMmMiLCJpYXQiOjE2Nzc5MDgzODEsIm5iZiI6MTY3NzkwODM4MSwiZXhwIjoxNjkzODA1OTgwLCJzdWIiOiIxMTk2MDAiLCJzY29wZXMiOlsiaW5zdGFsbF9hcHAiLCJyZWFkX2FnZW50X3Byb2ZpbGUiXX0.LYRotoHVS6KBeSjAD0lIvRobAwlLPCsv7BsbbPHTkB7Uggk-SHWyRl23otraj_ZGFeDn-LsrmIKEIJF0YxGZ_xoil-dx0HPTIHPgHtMbvJ8w274hLTtTOVyLBS72FKsF-fIaTLvnB2GW7vwLz7F8M1d1HP5wPquYjM5f7HuSAEU"
-            />
+            <AddNewContact @addNewContact="getAllContacts()" :token="this.token" />
           </div>
         </div>
 
@@ -37,18 +34,25 @@
               <tr v-for="contact in this.contacts" :key="contact.id" class="trBody">
                 <td class="tdName">
                   <div class="tdPhoto">Foto</div>
-                  <span>{{ contact.name }}</span>
+                  <span class="name">{{ contact.name }}</span>
                 </td>
                 <td class="tdEmail">
                   <span>{{ contact.email }}</span>
                 </td>
                 <td class="tdPhone">
                   <span>{{ contact.phone }}</span>
-                  
                 </td>
                 <td class="tdActions">
-                  <div>btn editar</div>
-                  <div>btn excluir</div>
+                  <div>
+                    <ButtonEdit @click="openEditDialog(contact.id)" />
+                  </div>
+                  <div>
+                    <DeleteContact
+                      :id="contact.id"
+                      :token="this.token"
+                      @deleteContact="getAllContacts()"
+                    />
+                  </div>
                 </td>
               </tr>
             </div>
@@ -60,15 +64,13 @@
             <img src="@/assets/image/imageNoContacts.png" alt="noContacts" />
             <div class="textNoContacts">Ainda não há contatos</div>
             <div class="buttonNoContact">
-              <AddNewContact
-                @addNewContact="getAllContacts()"
-                token="eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjhmZDRmYTQzYjQwZDljNDNmYjM4MDc1M2ZhMGM3NGViYWNhM2Y2NTQzNDQxNWZmZTk2NGMwM2VkYWY4MzUzMjZkZmVkMDg0NDg3YmFlZDJjIn0.eyJhdWQiOiJBUFAtNzkzZDdkNGUtOGY1Zi00NzEzLWE3MzYtYTYzNDBlZDNjYmMwIiwianRpIjoiOGZkNGZhNDNiNDBkOWM0M2ZiMzgwNzUzZmEwYzc0ZWJhY2EzZjY1NDM0NDE1ZmZlOTY0YzAzZWRhZjgzNTMyNmRmZWQwODQ0ODdiYWVkMmMiLCJpYXQiOjE2Nzc5MDgzODEsIm5iZiI6MTY3NzkwODM4MSwiZXhwIjoxNjkzODA1OTgwLCJzdWIiOiIxMTk2MDAiLCJzY29wZXMiOlsiaW5zdGFsbF9hcHAiLCJyZWFkX2FnZW50X3Byb2ZpbGUiXX0.LYRotoHVS6KBeSjAD0lIvRobAwlLPCsv7BsbbPHTkB7Uggk-SHWyRl23otraj_ZGFeDn-LsrmIKEIJF0YxGZ_xoil-dx0HPTIHPgHtMbvJ8w274hLTtTOVyLBS72FKsF-fIaTLvnB2GW7vwLz7F8M1d1HP5wPquYjM5f7HuSAEU"
-              />
+              <AddNewContact @addNewContact="getAllContacts()" :token="this.token" />
             </div>
           </div>
         </div>
       </section>
     </div>
   </div>
+  <EditContact @editContact="getAllContacts()" :id="this.idContact" :token="this.token" />
 </template>
 <script src="./listContacts.ts"></script>
