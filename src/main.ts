@@ -8,11 +8,11 @@ import VueAxios from 'vue-axios'
 
 import './assets/scss/style.scss'
 
-import AuthHuggy from 'modules-contacts-huggy/src/modules/1-AuthHuggy/AuthHuggy.vue'
-import AddNewContact from 'modules-contacts-huggy/src/modules/2-AddNewContact/AddNewContact.vue'
-import EditContact from 'modules-contacts-huggy/src/modules/3-EditContact/EditContact.vue'
-import DeleteContact from 'modules-contacts-huggy/src/modules/4-DeleteContact/DeleteContact.vue'
-import DetailsContact from 'modules-contacts-huggy/src/modules/5-DetailsContact/DetailsContact.vue'
+import AuthHuggy from 'contacts-modules-huggy/src/modules/1-AuthHuggy/AuthHuggy.vue'
+import AddNewContact from 'contacts-modules-huggy/src/modules/2-AddNewContact/AddNewContact.vue'
+import EditContact from 'contacts-modules-huggy/src/modules/3-EditContact/EditContact.vue'
+import DeleteContact from 'contacts-modules-huggy/src/modules/4-DeleteContact/DeleteContact.vue'
+import DetailsContact from 'contacts-modules-huggy/src/modules/5-DetailsContact/DetailsContact.vue'
 
 const app = createApp(App)
 
