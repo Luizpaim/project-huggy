@@ -37,8 +37,16 @@
                 <th class="thActions"></th>
               </tr>
             </thead>
-
-            <tbody class="tableBody" v-if="this.contacts">
+            <div class="noContacts" v-if="!this.contacts || this.contacts.length <= 0">
+              <div class="imageNoContacts">
+                <img src="@/assets/image/imageNoContacts.png" alt="noContacts" />
+                <div class="textNoContacts">Ainda não há contatos</div>
+                <div class="buttonNoContact">
+                  <AddNewContact @addNewContact="getAllContacts()" :token="this.token" />
+                </div>
+              </div>
+            </div>
+            <tbody class="tableBody" v-if="this.contacts || this.contacts.length > 0">
               <tr v-for="contact in this.contacts" :key="contact.id" class="trBody">
                 <div class="itemHover" :class="{ selected: contact.id === selected }">
                   <td class="tdName">
@@ -69,16 +77,6 @@
               </tr>
             </tbody>
           </table>
-        </div>
-
-        <div class="noContacts" v-if="!this.contacts">
-          <div class="imageNoContacts">
-            <img src="@/assets/image/imageNoContacts.png" alt="noContacts" />
-            <div class="textNoContacts">Ainda não há contatos</div>
-            <div class="buttonNoContact">
-              <AddNewContact @addNewContact="getAllContacts()" :token="this.token" />
-            </div>
-          </div>
         </div>
       </section>
     </div>
