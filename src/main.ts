@@ -31,6 +31,7 @@ app.component('AddNewContact', AddNewContact)
 app.component('EditContact', EditContact)
 app.component('DeleteContact', DeleteContact)
 app.component('DetailsContact', DetailsContact)
+
 app.component('InputSearch', InputSearch)
 app.component('ButtonEdit', ButtonEdit)
 app.component('Avatar', Avatar)
