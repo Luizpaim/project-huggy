@@ -21,37 +21,36 @@
           </div>
         </div>
 
-        <table class="tableContacts">
-          <thead>
-            <tr class="trNav">
-              <th class="thName">
-                Nome
-                <button @click="reverseData" :class="{ rotate: isRotated }" class="btnDesc">
-                  <img src="@/assets/image/iconDesc.png" alt="" />
-                </button>
-              </th>
-              <th class="thEmail">Email</th>
-              <th class="thPhone">Telefone</th>
-              <th class="thActions"></th>
-            </tr>
-          </thead>
+        <div class="tableContacts">
+          <LoadingHuggy :active="loading" :loadingTable="true" />
+          <table>
+            <thead>
+              <tr class="trNav">
+                <th class="thName">
+                  Nome
+                  <button @click="reverseData" :class="{ rotate: isRotated }" class="btnDesc">
+                    <img src="@/assets/image/iconDesc.png" alt="" />
+                  </button>
+                </th>
+                <th class="thEmail">Email</th>
+                <th class="thPhone">Telefone</th>
+                <th class="thActions"></th>
+              </tr>
+            </thead>
 
-          <tbody class="tableBody" v-if="this.contacts">
-            <div class="scroll">
+            <tbody class="tableBody" v-if="this.contacts">
               <tr v-for="contact in this.contacts" :key="contact.id" class="trBody">
-                <div
-                  class="itemHover"
-                  :class="{ selected: contact.id === selected }"
-                  @click="openDetailsDialog(contact.id)"
-                >
+                <div class="itemHover" :class="{ selected: contact.id === selected }">
                   <td class="tdName">
-                    <div class="tdPhoto">Foto</div>
+                    <div class="tdPhoto" @click="openDetailsDialog(contact.id)">
+                      <Avatar :src="contact.photo" :name="contact.name" />
+                    </div>
                     <span class="name">{{ contact.name }}</span>
                   </td>
-                  <td class="tdEmail" @click="openDetailsDialog(contact.id)">
+                  <td class="tdEmail">
                     <span>{{ contact.email }}</span>
                   </td>
-                  <td class="tdPhone" @click="openDetailsDialog(contact.id)">
+                  <td class="tdPhone">
                     <span>{{ contact.phone }}</span>
                   </td>
                   <td class="tdActions">
@@ -68,9 +67,9 @@
                   </td>
                 </div>
               </tr>
-            </div>
-          </tbody>
-        </table>
+            </tbody>
+          </table>
+        </div>
 
         <div class="noContacts" v-if="!this.contacts">
           <div class="imageNoContacts">

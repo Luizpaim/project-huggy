@@ -3,24 +3,19 @@ import { mapActions, mapState } from 'vuex'
 
 import { GetLocalToken } from '@/modules-local-storage'
 
-import InputSearch from '@/components/1-InputSearch/InputSearch.vue'
-import ButtonEdit from '@/components/2-ButtonEdit/ButtonEdit.vue'
-
 import './style.scss'
 
 export default defineComponent({
   name: 'PageListContacts',
-  components: {
-    InputSearch,
-    ButtonEdit
-  },
+
   data() {
     return {
       token: GetLocalToken().access_token,
       idContact: '',
       selected: '',
       paramsFilter: '',
-      isRotated: false
+      isRotated: false,
+      loading: false
     }
   },
   async created() {
@@ -33,18 +28,21 @@ export default defineComponent({
     ...mapActions('huggy', ['ActionGetAllContact']),
 
     async getAllContacts() {
+      this.loading = true
       await this.ActionGetAllContact({
         page: null,
-        phpne: this.paramsFilter,
-        email: this.paramsFilter
+        filter: this.paramsFilter
       })
 
       this.selected = ''
+      this.loading = false
     },
     reverseData() {
+      this.loading = true
       this.isRotated = this.isRotated ? false : true
       this.contacts.reverse()
       this.contacts = !this.contacts
+      this.loading = false
     },
     updateValueSearch(val: string) {
       this.paramsFilter = val

@@ -1,6 +1,6 @@
 export default [
   {
-    path: '/auth/:expires?',
+    path: '/auth',
     name: 'Entrar',
     component: () => import('@/pages/1-Login/Login.vue')
   }

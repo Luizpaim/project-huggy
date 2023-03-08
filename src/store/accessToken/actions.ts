@@ -25,7 +25,7 @@ export const actions = {
     if (auth) {
       const now = new Date().getTime()
       if (now > auth.expires_in) {
-        router.push({ path: '/auth/expires' })
+        router.push({ path: '/auth' })
       } else {
         return auth
       }

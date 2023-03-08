@@ -8,7 +8,7 @@ const contacts = new Contacts()
 export const actions = {
   ActionGetAllContact: async (
     { commit }: ActionContext<IState, any>,
-    params: { email?: string; phone?: string; page: number }
+    params: { filter?: string; page: number }
   ) =>
     await contacts
       .getAll(params)

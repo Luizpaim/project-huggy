@@ -15,13 +15,9 @@ export class Contacts extends ApiHuggy {
     super()
   }
 
-  public async getAll(params: {
-    email?: string
-    phone?: string
-    page: number
-  }): Promise<IContact[]> {
+  public async getAll(params: { filter?: string; page: number }): Promise<IContact[]> {
     const { data } = await this.api.get(
-      `/contacts?page=${params.page}&email=${params.email}`,
+      `/contacts?page=${params.page}&email=${params.filter}`,
       await this.configUrl()
     )
 
