@@ -20,9 +20,10 @@ export class Contacts extends ApiHuggy {
     phone?: string
     page: number
   }): Promise<IContact[]> {
-       
-    const { data } = await this.api.get(`/contacts?page=${params.page}`, await this.configUrl())
-       
+    const { data } = await this.api.get(
+      `/contacts?page=${params.page}&email=${params.email}`,
+      await this.configUrl()
+    )
 
     return data
   }

@@ -13,9 +13,6 @@ export default defineComponent({
     onInput: {
       type: Function as any,
       required: true
-    },
-    clean: {
-      type: Boolean
     }
   },
   setup(props) {
@@ -32,15 +29,6 @@ export default defineComponent({
       () => inputValue.value,
       (val) => {
         props.onInput(val)
-      }
-    )
-
-    watch(
-      () => props.clean,
-      (isClean) => {
-        if (!isClean) {
-          inputValue.value = ''
-        }
       }
     )
 

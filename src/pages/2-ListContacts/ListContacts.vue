@@ -7,7 +7,14 @@
       <section class="table">
         <div class="tableTitle">
           <div class="search">
-            <InputSearch type="text" placeholder="Buscar Contato" @input="updateValueDistrict" />
+            <InputSearch
+              :value="paramsFilter"
+              type="text"
+              placeholder="Buscar Contato"
+              @input="updateValueSearch"
+              @keypress="getAllContacts($event)"
+              @keyup="getAllContacts($event)"
+            />
           </div>
           <div class="newContact">
             <AddNewContact @addNewContact="getAllContacts()" :token="this.token" />
@@ -19,7 +26,7 @@
             <tr class="trNav">
               <th class="thName">
                 Nome
-                <button :class="{ rotate: isRotated }" class="btnDesc">
+                <button @click="reverseData" :class="{ rotate: isRotated }" class="btnDesc">
                   <img src="@/assets/image/iconDesc.png" alt="" />
                 </button>
               </th>
@@ -32,28 +39,34 @@
           <tbody class="tableBody" v-if="this.contacts">
             <div class="scroll">
               <tr v-for="contact in this.contacts" :key="contact.id" class="trBody">
-                <td class="tdName">
-                  <div class="tdPhoto">Foto</div>
-                  <span class="name">{{ contact.name }}</span>
-                </td>
-                <td class="tdEmail">
-                  <span>{{ contact.email }}</span>
-                </td>
-                <td class="tdPhone">
-                  <span>{{ contact.phone }}</span>
-                </td>
-                <td class="tdActions">
-                  <div>
-                    <ButtonEdit @click="openEditDialog(contact.id)" />
-                  </div>
-                  <div>
-                    <DeleteContact
-                      :id="contact.id"
-                      :token="this.token"
-                      @deleteContact="getAllContacts()"
-                    />
-                  </div>
-                </td>
+                <div
+                  class="itemHover"
+                  :class="{ selected: contact.id === selected }"
+                  @click="openDetailsDialog(contact.id)"
+                >
+                  <td class="tdName">
+                    <div class="tdPhoto">Foto</div>
+                    <span class="name">{{ contact.name }}</span>
+                  </td>
+                  <td class="tdEmail" @click="openDetailsDialog(contact.id)">
+                    <span>{{ contact.email }}</span>
+                  </td>
+                  <td class="tdPhone" @click="openDetailsDialog(contact.id)">
+                    <span>{{ contact.phone }}</span>
+                  </td>
+                  <td class="tdActions">
+                    <div class="btnEdit">
+                      <ButtonEdit @click="openEditDialog(contact.id)" />
+                    </div>
+                    <div class="btnDelete">
+                      <DeleteContact
+                        :id="contact.id"
+                        :token="this.token"
+                        @deleteContact="getAllContacts()"
+                      />
+                    </div>
+                  </td>
+                </div>
               </tr>
             </div>
           </tbody>
@@ -72,5 +85,6 @@
     </div>
   </div>
   <EditContact @editContact="getAllContacts()" :id="this.idContact" :token="this.token" />
+  <DetailsContact @detailsContact="getAllContacts()" :id="this.idContact" :token="this.token" />
 </template>
 <script src="./listContacts.ts"></script>

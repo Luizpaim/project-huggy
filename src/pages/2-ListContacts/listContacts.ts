@@ -17,7 +17,10 @@ export default defineComponent({
   data() {
     return {
       token: GetLocalToken().access_token,
-      idContact: ''
+      idContact: '',
+      selected: '',
+      paramsFilter: '',
+      isRotated: false
     }
   },
   async created() {
@@ -29,12 +32,34 @@ export default defineComponent({
   methods: {
     ...mapActions('huggy', ['ActionGetAllContact']),
 
-    async getAllContacts(name?: string, email?: string) {
-      await this.ActionGetAllContact({ page: 0 })
+    async getAllContacts() {
+      await this.ActionGetAllContact({
+        page: null,
+        phpne: this.paramsFilter,
+        email: this.paramsFilter
+      })
+
+      this.selected = ''
     },
+    reverseData() {
+      this.isRotated = this.isRotated ? false : true
+      this.contacts.reverse()
+      this.contacts = !this.contacts
+    },
+    updateValueSearch(val: string) {
+      this.paramsFilter = val
+    },
+
     openEditDialog(id: string) {
       this.idContact = id
       const modal = document.getElementById('editContact') as HTMLDialogElement
+      modal.showModal()
+    },
+
+    openDetailsDialog(id: string) {
+      this.idContact = id
+      this.selected = id
+      const modal = document.getElementById('detailsContact') as HTMLDialogElement
       modal.showModal()
     }
   }
