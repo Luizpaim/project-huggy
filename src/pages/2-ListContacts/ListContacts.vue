@@ -66,11 +66,7 @@
                       <ButtonEdit @click="openEditDialog(contact.id)" />
                     </div>
                     <div class="btnDelete">
-                      <DeleteContact
-                        :id="contact.id"
-                        :token="this.token"
-                        @deleteContact="getAllContacts()"
-                      />
+                      <ButtonDelete @click="openDeleteDialog(contact.id)" />
                     </div>
                   </td>
                 </div>
@@ -82,6 +78,7 @@
     </div>
   </div>
   <EditContact @editContact="getAllContacts()" :id="this.idContact" :token="this.token" />
+  <DeleteContact @deleteContact="getAllContacts()" :id="this.idContact" :token="this.token" />
   <DetailsContact @detailsContact="getAllContacts()" :id="this.idContact" :token="this.token" />
 </template>
 <script src="./listContacts.ts"></script>

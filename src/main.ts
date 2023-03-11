@@ -19,6 +19,7 @@ import InputSearch from '@/components/1-InputSearch/InputSearch.vue'
 import ButtonEdit from '@/components/2-ButtonEdit/ButtonEdit.vue'
 import Avatar from '@/components/3-Avatar/AvatarUser.vue'
 import LoadingHuggy from '@/components/4-Loading/LoadingHuggy.vue'
+import ButtonDelete from '@/components/5-ButtonDelete//ButtonDelete.vue'
 
 const app = createApp(App)
 
@@ -36,5 +37,6 @@ app.component('InputSearch', InputSearch)
 app.component('ButtonEdit', ButtonEdit)
 app.component('Avatar', Avatar)
 app.component('LoadingHuggy', LoadingHuggy)
+app.component('ButtonDelete', ButtonDelete)
 
 app.mount('#app')

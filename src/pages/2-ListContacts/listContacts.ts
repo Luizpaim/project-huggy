@@ -54,6 +54,12 @@ export default defineComponent({
       modal.showModal()
     },
 
+    openDeleteDialog(id: string) {
+      this.idContact = id
+      const modal = document.getElementById('deleteContact') as HTMLDialogElement
+      modal.showModal()
+    },
+
     openDetailsDialog(id: string) {
       this.idContact = id
       this.selected = id
